@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # 🍳 Recipe Preparation Agent
 
 An AI-powered web application built with **Node.js** and **IBM Granite LLM**, designed to turn your available ingredients into smart, complete recipes.
@@ -196,6 +194,5 @@ For questions or issues:
 ---
 
 **Built with ❤️ using Node.js, Tailwind CSS, and IBM Granite LLM**
-=======
 # IBM-CLOUD-EDUNET
 >>>>>>> 98a67790a5b569079798b91e89d0b6a4db01d2c8
