@@ -1,197 +1,74 @@
-# 🍳 Recipe Preparation Agent
+Recipe Preparation Agent
+Overview
+This project contains a Jupyter Notebook (Recipe Preparation Agent.ipynb) that demonstrates the use of a Recipe Preparation Agent built with watsonx.ai and LangGraph. The agent helps users generate recipe ideas based on available ingredients and local weather conditions. It uses the IBM watsonx.ai API to authenticate, create an agent with tools, and invoke it to provide tailored recipe suggestions.
+Features
 
-An AI-powered web application built with **Node.js** and **IBM Granite LLM**, designed to turn your available ingredients into smart, complete recipes.
+Authentication: Uses IBM Cloud personal API key to connect to the watsonx.ai API.
+Agent Creation: Configures a LangGraph agent with a specified model (ibm/granite-3-3-8b-instruct) and parameters.
+Recipe Suggestions: Generates 2-3 recipe ideas based on user-provided ingredients and local weather (obtained via a search tool).
+Weather Consideration: Asks for the user's location to suggest recipes suitable for the current climate.
+Dietary Restrictions: Adapts suggestions to user-specified dietary preferences (e.g., vegetarian, gluten-free) if provided.
+Interactive: Responds to user queries with a friendly introduction and detailed recipe instructions upon selection.
 
----
+Prerequisites
 
-## 🚀 Features
+Python 3.11: Ensure Python 3.11 is installed.
+IBM Cloud API Key: Obtain an API key from IBM Cloud.
+Dependencies: Install required Python packages listed in the notebook:pip install langchain-ibm ibm-watsonx-ai langgraph requests
 
-- **AI-Powered Recipes**: Enter your ingredients and get full recipes instantly  
-- **Step-by-Step Instructions**: Easy-to-follow directions for seamless cooking  
-- **Smart Substitutions**: Helpful alternative ingredient suggestions  
-- **Cooking Tips**: Pro tips to enhance your dishes  
-- **Nutritional Highlights**: Basic nutrition facts for your meal  
-- **Modern UI**: Responsive, user-friendly design using Tailwind CSS  
-- **Copy Button**: Quickly copy and share recipes  
 
----
+Project/Space ID: Set environment variables PROJECT_ID or SPACE_ID for the watsonx.ai context.
 
-## 🛠️ Tech Stack
+Setup Instructions
 
-- **Backend**: Node.js with Express  
-- **AI Integration**: IBM Granite LLM via Watson Machine Learning  
-- **Frontend**: HTML, Tailwind CSS, JavaScript  
-- **Styling**: Tailwind CSS (with custom styling)
+Clone the Repository:
+git clone <repository-url>
+cd <repository-folder>
 
----
 
-## 📦 Getting Started
+Install Dependencies:Run the following command to install required packages:
+pip install -r requirements.txt
 
-### Prerequisites
+Note: You may need to create a requirements.txt file with the dependencies listed above.
 
-- Node.js (v16 or higher)  
-- IBM Cloud account with Watson Machine Learning  
-- Watson Machine Learning API credentials
+Set Environment Variables:Set the PROJECT_ID or SPACE_ID environment variable:
+export PROJECT_ID=<your-project-id>
+export SPACE_ID=<your-space-id>
 
-### Installation
 
-1. **Clone the Repository**
-   ```bash
-   git clone <repository-url>
-   cd recipe-preparation-agent
-   ```
+Run the Notebook:
 
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+Open the Recipe Preparation Agent.ipynb in Jupyter Notebook or JupyterLab.
+Follow the notebook cells to authenticate, create the agent, and invoke it with a question.
 
-3. **Configure Environment**
-   - Copy `.env.example` to `.env`
-   - Fill in your IBM credentials:
-     ```
-     IBM_WATSON_ML_API_KEY=your_api_key
-     IBM_WATSON_ML_URL=https://us-south.ml.cloud.ibm.com
-     IBM_WATSON_ML_PROJECT_ID=your_project_id
-     ```
 
-4. **Start the App**
-   ```bash
-   npm start
-   ```
 
-5. **Visit in Browser**
-   - Navigate to: `http://localhost:5000`
+Usage
 
----
+Run the Notebook:Execute the cells in Recipe Preparation Agent.ipynb sequentially to set up the agent.
 
-## 🔐 Get IBM Watson ML Credentials
+Interact with the Agent:
 
-1. **Create IBM Cloud Account**
-   - Sign up at [IBM Cloud](https://cloud.ibm.com/)
+When prompted, enter your question (e.g., list available ingredients).
+The agent will ask for your location to consider weather conditions.
+Receive 2-3 recipe suggestions with brief descriptions.
+Select a recipe to get detailed instructions, including ingredient quantities and cooking steps.
 
-2. **Create Watson Machine Learning Instance**
-   - From the IBM Cloud dashboard:  
-     - Click **Create Resource** → Search for *Watson Machine Learning*  
-     - Select the **Lite** plan (free)
 
-3. **Generate API Key**
-   - Go to your service instance → **Service credentials**  
-   - Create credentials → Copy the `apikey`
+Example Interaction:
 
-4. **Get Project ID**
-   - Visit [Watson Studio](https://dataplatform.cloud.ibm.com/)  
-   - Create a new project → Go to project settings → Copy the **Project ID**
+Input: "I have chicken, rice, and carrots."
+Agent Response: "Hi there! I'm Recipe Preparation Agent, ready to help you create delicious meals with the ingredients you have. I'll even consider the current weather in your area to suggest the perfect dishes for the day! Could you please share your location and confirm the ingredients (chicken, rice, carrots)?"
+After providing location: The agent uses a search tool to check the weather and suggests recipes (e.g., a warm chicken and rice soup for cold weather).
 
----
 
-## ⚙️ How to Use
 
-1. Enter your ingredients (e.g., `tomato, onion, garlic`)  
-2. Click **Generate Recipe**  
-3. Get:
-   - Full recipe with quantities  
-   - Cooking steps  
-   - Smart substitutions  
-   - Tips and nutrition info  
-4. Click **Copy** to save or share the recipe
+Notes
 
----
+The notebook uses the ibm/granite-3-3-8b-instruct model for inference.
+Ensure the code is executed in the provided order, as modifications may prevent successful execution.
+The agent only responds to food recipe questions and ignores unrelated queries.
+For detailed documentation, refer to the watsonx.ai documentation or the notebook's linked resources.
 
-## ✨ Example Inputs
-
-| Ingredients                        | Suggested Recipe               |
-|-----------------------------------|--------------------------------|
-| `tomato, onion, rice`             | Tomato Rice Pilaf              |
-| `chicken, garlic, lemon, herbs`   | Herb-Crusted Lemon Chicken     |
-| `pasta, mushrooms, cream`         | Creamy Mushroom Pasta          |
-| `eggs, spinach, cheese`           | Spinach & Cheese Omelet        |
-
----
-
-## 📡 API Endpoints
-
-- `GET /` → Main App Page  
-- `POST /generate-recipe` → AI recipe generation  
-- `GET /health` → Health check
-
----
-
-## 📁 Project Structure
-
-```
-recipe-preparation-agent/
-├── server.js              # Express server setup
-├── package.json           # App dependencies
-├── .env.example           # Env variable template
-└── public/
-    ├── index.html         # UI template
-    ├── js/
-    │   └── app.js         # Frontend logic
-    └── css/
-        └── style.css      # Tailwind + custom CSS
-```
-
----
-
-## 🧠 AI Capabilities in Depth
-
-### Smart Recipe Suggestions
-- IBM Granite LLM generates realistic and creative recipes
-- Takes ingredient combinations and cuisine logic into account
-
-### Clean Formatting
-- Readable and well-structured output
-- Key information is clearly highlighted
-
-### Mobile-First Design
-- Fully responsive on all devices
-- Intuitive layout for any screen size
-
----
-
-## 🧩 Troubleshooting
-
-### API Key Issues
-- Double-check `.env` values  
-- Ensure the Watson ML instance is active  
-- Confirm Project ID is correct
-
-### Recipe Not Generating?
-- Test your internet connection  
-- Try using simpler ingredient combinations  
-- Check IBM Cloud service status
-
-### Styling or UI Problems
-- Confirm Tailwind CSS is loaded  
-- Inspect the browser console for errors  
-- Refresh and clear browser cache
-
----
-
-## 🤝 Contributing
-
-1. Fork this repo  
-2. Create a new branch for your feature  
-3. Commit changes and test thoroughly  
-4. Submit a Pull Request (PR)
-
----
-
-## 📄 License
-
-Licensed under the MIT License. See `LICENSE` file for full details.
-
----
-
-## 📬 Support
-
-For questions or issues:  
-- Refer to the [Troubleshooting](#-troubleshooting) section  
-- Check IBM Watson ML [documentation](https://cloud.ibm.com/docs/watson-machine-learning)  
-- Or open an issue in the GitHub repo
-
----
-
-**Built with ❤️ using Node.js, Tailwind CSS, and IBM Granite LLM**
-# IBM-CLOUD-EDUNET
+License
+Licensed Materials - Copyright © 2024 IBM. This project is released under the terms of the ILAN License. See the License Terms for details.
